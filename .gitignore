@@ -1,0 +1,5 @@
+terraform.csv
+.terraform
+*.tfstate
+*.tfstate.backup
+.DS_Store
