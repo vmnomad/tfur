@@ -3,6 +3,13 @@ provider "aws" {
 }
 
 
+variable "server_port" {
+  description = "The port that will be used for web server to serve the requests"
+  type = number
+  default = 8080
+}
+
+
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -24,8 +31,8 @@ resource "aws_security_group" "instance" {
   name = "terraform-example-instance"
 
   ingress {
-    from_port = 8080
-    to_port   = 8080
+    from_port = var.server_port
+    to_port   = var.server_port
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -41,15 +48,13 @@ resource "aws_instance" "vm" {
   user_data = <<-EOF
               #!/bin/bash
               echo "Hello, World" > index.html
-              nohup busybox httpd -f -p 8080 &
+              nohup busybox httpd -f -p ${var.server_port} &
               EOF
 
 
   tags = {
     Name = "terraform-example"
   }
-
-
 
 
 }
