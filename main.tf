@@ -55,14 +55,9 @@ resource "aws_instance" "vm" {
   tags = {
     Name = "terraform-example"
   }
-
-
-
-
-
 }
 
-  output "public_ip" {
-    value       = aws_instance.vm.public_ip
-    description = "The public IP address of the provisioned web server"
-  }
+output "public_ip" {
+  value       = aws_instance.vm.public_ip
+  description = "The public IP address of the provisioned web server"
+}
