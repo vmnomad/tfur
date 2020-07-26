@@ -5,8 +5,8 @@ provider "aws" {
 
 variable "server_port" {
   description = "The port that will be used for web server to serve the requests"
-  type = number
-  default = 8080
+  type        = number
+  default     = 8080
 }
 
 
@@ -31,9 +31,9 @@ resource "aws_security_group" "instance" {
   name = "terraform-example-instance"
 
   ingress {
-    from_port = var.server_port
-    to_port   = var.server_port
-    protocol = "tcp"
+    from_port   = var.server_port
+    to_port     = var.server_port
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
@@ -41,8 +41,8 @@ resource "aws_security_group" "instance" {
 
 
 resource "aws_instance" "vm" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
+  ami                    = data.aws_ami.ubuntu.id
+  instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.instance.id]
 
   user_data = <<-EOF
@@ -57,5 +57,12 @@ resource "aws_instance" "vm" {
   }
 
 
+
+
+
 }
 
+  output "public_ip" {
+    value       = aws_instance.vm.public_ip
+    description = "The public IP address of the provisioned web server"
+  }
