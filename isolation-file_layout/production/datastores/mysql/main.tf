@@ -2,7 +2,7 @@ terraform {
   backend "s3" {
     # Replace this with your bucket name!
     bucket         = "terraform-up-and-running-state-askar"
-    key            = "stage/datastores/mysql/terraform.tfstate"
+    key            = "production/datastores/mysql/terraform.tfstate"
     region         = "ap-southeast-2"
 
     # Replace this with your DynamoDB table name!

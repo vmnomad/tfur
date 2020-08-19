@@ -3,7 +3,8 @@ variable "db_password" {
     type = string
 }
 
-variable "environment" {
-    description = "the name of the environment"
+variable "db_name"{
+    description = "the database name"
     type = string
 }
+
